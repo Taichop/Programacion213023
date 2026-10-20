@@ -78,7 +78,7 @@ class AppMantenimiento:
             self.frame_login, text="", fg="red")
         self.mensaje_error_login.pack()
 
-        # Creamos el frame principal de la aplicación, que estará oculto hasta que el usuario inicie sesión correctamente
+        # Creamos el frame registro de entrada, que estará oculto hasta que el usuario inicie sesión correctamente
         self.frame_registro_entrada = tkinter.Frame(self.ventana)
 
         tkinter.Label(self.frame_registro_entrada,
@@ -86,11 +86,11 @@ class AppMantenimiento:
         tkinter.Label(self.frame_registro_entrada,
                       text="Computer Registration", fg="blue").pack(pady=20)
         tkinter.Label(self.frame_registro_entrada,
-                      text="Entrance Hour", fg="red").pack()
+                      text="Entrance Hour (Only Integers)", fg="red").pack()
         self.caja_hora = tkinter.Entry(self.frame_registro_entrada)
         self.caja_hora.pack()
         tkinter.Label(self.frame_registro_entrada,
-                      text="Hour Cost", fg="red").pack()
+                      text="Hour Cost (Only Integers)", fg="red").pack()
         self.caja_valor = tkinter.Entry(self.frame_registro_entrada)
         self.caja_valor.pack()
         tkinter.Button(self.frame_registro_entrada, text="Submit",
@@ -156,7 +156,7 @@ class AppMantenimiento:
         hora_entrada = self.caja_hora.get()
         valor_hora = self.caja_valor.get()
 
-        if hora_entrada and valor_hora:
+        if 0 <= int(hora_entrada) <= 23 and 0 < float(valor_hora):
             try:
                 hora_entrada = int(hora_entrada)
                 valor_hora = float(valor_hora)
@@ -171,7 +171,7 @@ class AppMantenimiento:
                     text="Please enter valid numbers for hour and cost.", fg="red")
         else:
             self.etiqueta_estado_registro.config(
-                text="Please fill in all fields.", fg="red")
+                text="Please fill in all fields with valid values.", fg="red")
 
     def mostrar_menu_registro_entrada(self):
         # Ocultar el frame de registro de entrada
